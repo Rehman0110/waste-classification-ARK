@@ -7,6 +7,7 @@ import os
 import sys
 import json
 from datetime import datetime
+import requests
 
 import streamlit as st
 import numpy as np
@@ -16,15 +17,13 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 
-from src.data_loader import preprocess_pil_image
-from src.evaluator import predict_single
 from src.voice_output import announce_prediction, get_suggestion
 
 
 # ── CONSTANTS ────────────────────────────────────────────────
 CLASS_NAMES = ["Organic", "Recyclable"]
 
-MODEL_PATH = os.path.join(ROOT, "models", "mobilenet_model_best.h5")
+API_URL = os.getenv("API_URL", "http://localhost:8000/predict")
 
 CLASS_COLOURS = {
     "Recyclable": "#2196F3",
@@ -41,10 +40,13 @@ st.set_page_config("Waste Classifier", "♻️", layout="wide")
 
 # ── SESSION STATE ─────────────────────────────────────────────
 def init_state():
-    if "model" not in st.session_state:
-        from tensorflow.keras.models import load_model
-        st.session_state.model = load_model(MODEL_PATH)
-
+    # Check if API is online
+    try:
+        api_base = API_URL.replace("/predict", "")
+        requests.get(f"{api_base}/", timeout=2)
+    except requests.exceptions.ConnectionError:
+        st.warning("⚠️ Waste Segregation API is offline. Please run 'python api.py' first.")
+        
     if "camera_on" not in st.session_state:
         st.session_state.camera_on = False
 
@@ -148,11 +150,25 @@ if img_file:
         st.session_state.last_run = run_id
 
         with st.spinner("Predicting..."):
+            try:
+                # Prepare the file for the API request
+                files = {"file": (img_file.name, img_file.getvalue(), img_file.type)}
+                response = requests.post(API_URL, files=files)
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    class_name = result["prediction"]
+                    confidence = result["confidence"]
+                    probs = result["probabilities"]
+                else:
+                    st.error(f"API Error: {response.text}")
+                    st.stop()
+                    
+            except Exception as e:
+                st.error(f"Failed to connect to the prediction API: {str(e)}")
+                st.stop()
 
-            x = preprocess_pil_image(img)
-            model = st.session_state.model
-
-            class_name, confidence, probs = predict_single(model, x)
+        # ── SUCCESS HANDLING ──────────────────────────────────────
 
         save_prediction(class_name, confidence)
 

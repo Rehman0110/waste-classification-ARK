@@ -9,7 +9,10 @@ from tensorflow.keras.models import load_model
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, ROOT)
 MODELS_DIR = os.path.join(ROOT, "models")
+
+from src.evaluator import predict_single
 
 # ⚠️ MUST MATCH YOUR TRAINED MODEL ORDER
 CLASS_NAMES = ["Organic", "Recyclable"]
@@ -31,7 +34,7 @@ SUGGESTIONS = {
 
 
 # ────────────────────────────────────────────────
-def preprocess_frame(frame, size=(224, 224)):
+def preprocess_frame(frame, size=(200, 200)):
     h, w = frame.shape[:2]
 
     margin = 60
@@ -79,7 +82,7 @@ def run_webcam(model_path: str, camera_index: int = 0):
         h, w = frame.shape[:2]
 
         # UI box
-        cv2.rectangle(frame, (60, 60), (w-60, h-80), (80, 80, 80), 2)
+        cv2.rectangle(frame, (60, 60), (w-40, h-50), (80, 80, 80), 2)
 
         if last_pred:
             color = CLASS_COLOURS_BGR.get(last_pred, (200, 200, 200))
@@ -106,23 +109,9 @@ def run_webcam(model_path: str, camera_index: int = 0):
         elif key == ord(" "):
 
             x = preprocess_frame(frame)
-
             t0 = time.time()
-            preds = model.predict(x, verbose=0)[0]
+            last_pred, last_conf, last_probs = predict_single(model, x)
             inference = (time.time() - t0) * 1000
-
-            idx = int(np.argmax(preds))
-
-            # SAFE mapping (prevents crash if mismatch)
-            if idx >= len(CLASS_NAMES):
-                print("⚠️ Model output mismatch")
-                continue
-
-            last_pred = CLASS_NAMES[idx]
-            last_conf = float(preds[idx])
-            last_probs = {
-                CLASS_NAMES[i]: float(preds[i]) for i in range(len(CLASS_NAMES))
-            }
 
             last_time = inference
 
