@@ -1,0 +1,92 @@
+[
+  {
+    "timestamp": "2026-04-18T11:11:50.060981",
+    "class": "Recyclable",
+    "confidence": 0.8268084526062012,
+    "probs": {
+      "Organic": 0.17319154739379883,
+      "Recyclable": 0.8268084526062012
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:13:38.351907",
+    "class": "Organic",
+    "confidence": 0.9783263504505157,
+    "probs": {
+      "Organic": 0.9783263504505157,
+      "Recyclable": 0.021673649549484253
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:13:47.854015",
+    "class": "Organic",
+    "confidence": 0.9783263504505157,
+    "probs": {
+      "Organic": 0.9783263504505157,
+      "Recyclable": 0.021673649549484253
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:14:05.234853",
+    "class": "Organic",
+    "confidence": 0.9783263504505157,
+    "probs": {
+      "Organic": 0.9783263504505157,
+      "Recyclable": 0.021673649549484253
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:14:37.427508",
+    "class": "Recyclable",
+    "confidence": 0.9661824107170105,
+    "probs": {
+      "Organic": 0.0338175892829895,
+      "Recyclable": 0.9661824107170105
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:14:49.990967",
+    "class": "Recyclable",
+    "confidence": 0.9661824107170105,
+    "probs": {
+      "Organic": 0.0338175892829895,
+      "Recyclable": 0.9661824107170105
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:16:19.113782",
+    "class": "Recyclable",
+    "confidence": 0.9656693935394287,
+    "probs": {
+      "Organic": 0.03433060646057129,
+      "Recyclable": 0.9656693935394287
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:17:38.427373",
+    "class": "Recyclable",
+    "confidence": 0.6086308360099792,
+    "probs": {
+      "Organic": 0.39136916399002075,
+      "Recyclable": 0.6086308360099792
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:19:54.697619",
+    "class": "Recyclable",
+    "confidence": 0.6086308360099792,
+    "probs": {
+      "Organic": 0.39136916399002075,
+      "Recyclable": 0.6086308360099792
+    }
+  },
+  {
+    "timestamp": "2026-04-18T11:24:20.919709",
+    "class": "Recyclable",
+    "confidence": 0.9656693935394287,
+    "probs": {
+      "Organic": 0.03433060646057129,
+      "Recyclable": 0.9656693935394287
+    }
+  }
+]
