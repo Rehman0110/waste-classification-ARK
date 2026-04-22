@@ -1,5 +1,5 @@
 # =============================================================
-# main.py (Clean Version)
+# main.py (Updated - Keras 3 Compatible)
 # =============================================================
 
 import os
@@ -45,9 +45,10 @@ def main():
         phase2_epochs=p2_epochs
     )
 
-    # ── Save model ────────────────────────────────────────────
-    save_path = os.path.join(MODELS_DIR, "mobilenet_model.h5")
+    # ── Save model ───────────────────────────
+    save_path = os.path.join(MODELS_DIR, "mobilenet_model.keras")
     model.save(save_path)
+
     print(f"\n✅ Training complete. Model saved to: {save_path}")
 
     # ── Generate Plots ────────────────────────────────────────
@@ -55,7 +56,7 @@ def main():
 
     # ── Evaluate ──────────────────────────────────────────────
     evaluate_model(model, val_gen, model_name="mobilenet_v2")
-   
+
 
 if __name__ == "__main__":
     main()

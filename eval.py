@@ -3,7 +3,7 @@ from src.data_loader import get_data_generators
 from src.evaluator import evaluate_model
 
 # ── Paths ─────────────────────────────
-MODEL_PATH = "models/mobilenet_model.h5"
+MODEL_PATH = "models/mobilenet_model.keras"
 DATA_DIR = "data"
 
 

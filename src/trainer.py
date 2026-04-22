@@ -41,7 +41,7 @@ def get_callbacks(model_name: str = "model", patience: int = 7):
     Returns:
         List of Keras callbacks
     """
-    checkpoint_path = os.path.join(MODELS_DIR, f"{model_name}_best.h5")
+    checkpoint_path = os.path.join(MODELS_DIR, f"{model_name}_best.keras")
 
     callbacks = [
         # ── Stop training early if no improvement ────────────
@@ -106,7 +106,7 @@ def train_model(model, train_gen, val_gen,
     )
 
     # ── Save final model ──────────────────────────────────────
-    final_path = os.path.join(MODELS_DIR, f"{model_name}.h5")
+    final_path = os.path.join(MODELS_DIR, f"{model_name}.keras")
     model.save(final_path)
     print(f"\n✅ Model saved → {final_path}")
 

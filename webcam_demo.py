@@ -128,7 +128,7 @@ if __name__ == "__main__":
     parser.add_argument("--model", default="mobilenet")
     args = parser.parse_args()
 
-    model_path = os.path.join(MODELS_DIR, "mobilenet_model.h5")
+    model_path = os.path.join(MODELS_DIR, "mobilenet_model.keras")
 
     if not os.path.exists(model_path):
         print("❌ Model not found")
