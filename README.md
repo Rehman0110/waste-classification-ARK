@@ -1,6 +1,6 @@
 # 🗑️ Smart Waste Segregation System using CNN
 
-An end-to-end deep learning project that classifies waste images into **Recyclable**, **Organic**, and **Hazardous** categories using a Convolutional Neural Network (CNN) with Transfer Learning.
+An end-to-end deep learning project that classifies waste images into **Recyclable** and **Organic** categories using MobileNetV2 Transfer Learning and Keras 3.
 
 ---
 
